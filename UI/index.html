@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mail Archiver</title>
+  <link rel="icon" type="image/png" href="files/logo.png">
+  <link rel="stylesheet" href="css/newstyle.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="head" class="section">
+    <div id="search-container" class="table">
+      <div id="search-txt" class="col">
+        <div id="calendar" class="col srch-txt">
+          <img src="files/icon_calender.svg" alt="">
+        </div>
+        <div class="col srch-txt"><span>2020/1/1 - 2020/1/1</span></div>
+      </div>
+      <div id="search-icon" class="col" onclick=check()>
+        <img src="files/icon_search.svg" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div id="caption"><strong>Results: <span id="count">0</span>mail(s)</strong></div>
+    <div id="table">
+      <div id="thead"></div>
+      <div id="tbody"></div>
+    </div>
+    <div id="logo-container" class=""></div>
+  </div>
+  <script src="dummy_data.js"></script>
+  <script src="main.js"></script>
+  <script src="mail_detail.js"></script>
+  <script src="state.js"></script> 
+</body>
+</html>
