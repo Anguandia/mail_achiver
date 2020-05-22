@@ -317,3 +317,31 @@ body {
 #actions > *, .delete > *, #search-icon {
   cursor: pointer;
 }
+
+/* show tooltip for viewing multiple mail bodies */
+#tip {
+  position: absolute;
+  margin-top: -3.5%;
+  transform: translateX(5%);
+  padding: 1%;
+  display: none;
+  font-size: small;
+  font-style: italic;
+  font-weight: lighter;
+  background: rgb(184, 184, 184);
+}
+
+#tip:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 8%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top-color: rgb(184, 184, 184);
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -10px;
+} 

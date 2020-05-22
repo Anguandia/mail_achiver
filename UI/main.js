@@ -3,6 +3,7 @@ table = document.querySelector('#table'),
 body = document.querySelector('#tbody'),
 logo = document.getElementById('logo-container'),
 count = document.getElementById('count'),
+message = document.getElementById('message');
 clip = body.querySelectorAll('style'),
 sender = body.getElementsByClassName('td')[0],
 to = body.getElementsByClassName('td')[1],
@@ -21,6 +22,7 @@ function resetListeners() {
   const emails = body.querySelectorAll('.tr');
   if(emails.length) {
     Array.prototype.forEach.call(emails, (email) => {
+      ['mouseover', 'mouseout'].forEach(e => assignListener(email, e, iconColor));
       if(email.onclick === null) {
         return assignListener(email, 'click', () => openSelection(email));
       }
@@ -97,12 +99,20 @@ function fillEmailFields(email) {
     let c = createElt('td');
     enterData(c, email[cell]);
     return c;
-  });
+  }); 
 }
 
 function showExtraNumberWithSameCorrespondents(email, elt) {
+  elt.className += ' tip';
   elt.innerHTML = email.threads > 1
-      ? `<span style=\'font-size:75%\'>+${email.threads -1}</span>`: '';
+      ? `<span id='tip'>Click here to view all${email.threads} mails
+      </span><span style=\'font-size:75%\'>+${email.threads -1}</span>`
+      : '';
+}
+
+function showReadMultipleTip() {
+  message.style.visibility = 'visible';
+  setTimeout(() => message.style.visibility = 'hidden', 3000);
 }
 
 function displayAttachmentIcon(email, att, date) {
@@ -110,6 +120,7 @@ function displayAttachmentIcon(email, att, date) {
       ? '<img src=\'files/icon_clip.svg\' alt=\'photo.png\' />': '';
     if (screen.width <= 620) {
       att.style.marginRight = `${date.innerHTML.split('<')[0].length + 2}ch`;
+      showReadMultipleTip(email);
     }
 }
 
@@ -125,6 +136,7 @@ const assignListener = (elt, event, fn) => elt.addEventListener(event, fn);
 // give the clip svg icon the blue coor on selection
 function iconColor() {
   const icons = this.getElementsByTagName('img');
+  showTooltip(this);
   Array.prototype.forEach.call(icons, (i) => {
     i.style.filter = !i.style.filter ? blue: '';
   });
@@ -172,9 +184,19 @@ function checkMulipleMailsBetweenSameUsers(allMail) {
   const unique = new Set(userArr);
   if(unique.size > 1) {
     return tallyMails(allMail, unique);
-  } 
+  }
   allMail.forEach((e) => tallyFields.forEach((f) => e[f] = [].concat(e[f])));
   return sortRaw(allMail);
+}
+
+function showTooltip(elt) {
+  const tipContainer = elt.children[2];
+  const tip = tipContainer.firstChild;
+  if(tip && tip.style.display === 'block') {
+    tip.style.display = 'none';
+  } else if(tip) {
+    tip.style.display = 'block';
+  }
 }
 
 // core function to build list of all emails
@@ -195,6 +217,7 @@ function createMailList(allMail) {
     _body.setAttribute('class', 'body'); // identify the email body fo hidding
     const events = ['click', 'mouseover', 'mouseout'];
     const handlers = [() => openSelection(tr), iconColor, iconColor];
+    total.addEventListener('click', () => openMail(tr), false);
     events.forEach((v, i) => assignListener(tr, v, handlers[i]));
     return tr;  
   });

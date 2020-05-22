@@ -5,7 +5,7 @@ let date, num, iconArrow, lab, newRaw, cur, mailDetail;
 
 function checkIfMultipleMails(target) {
   cur = target.getElementsByClassName('td');
-  if(Number(cur[2].textContent)) {
+  if(Number(cur[2].textContent.split('+')[1])) {
     return MAILS.filter((m) =>
     m.from === cur[0].textContent && m.to.join(', ') === cur[1].textContent);
   }
