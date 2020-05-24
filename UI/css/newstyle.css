@@ -102,7 +102,7 @@ body {
 
 #logo-container img {
   position: absolute;
-  margin: 25vh 50%;
+  margin: 28vh 50%;
   width: 9rem;
   transform: translate(-4.5rem, -2.775rem);
 }
@@ -150,7 +150,7 @@ body {
 }
 
 .td:nth-child(7) {
-  visibility: collapse;
+  /* visibility: collapse; */
 }
 
 .td {
@@ -222,39 +222,43 @@ body {
 }
 
 #from .label, #to .label, #subject .label {
-  display: inline;
+  /* display: inline; */
 }
 
-#date {
-  position: relative;
-  top: -5rem;
+.detail ._date {
+  position: absolute;
+  top: 2rem;
   left: 90%;
   font-weight: lighter !important;
   font-size: 80%;
   font-style: italic;
 }
 
-#threads {
+.detail ._threads {
   /* hide email count, now shown in the head where found was */
   display: none;
 }
 
-#from, #to, #subject, #attachment {
+.detail ._from, .detail ._to, .detail ._subject, .detail ._attachment {
   padding: 0%;
   max-width: 100%;
   font-weight: normal;
   font-size: small;
 }
 
-#threads span {
+.detail ._threads span {
   padding: 0;
   background: none;
   color: unset;
 }
 
-#from, #to {
+.detail ._from, .detail ._to {
   /* show email addressses as links */
   color: blue !important;
+}
+
+.detail ._subject {
+  margin-bottom: 4%;
 }
 
 .action {
@@ -278,19 +282,19 @@ body {
   padding-right: 5%;
 }
 
-#body {
-  font-size: small;
+.body {
+  font-size: 90%;
 }
 
-#attachment {
-  position: absolute;
-  bottom: 2%;
-  float: right;
+.detail ._attachment {
+  position: absolute !important;
+  bottom: 20% !important;
+  left: 90% !important;
 }
 
 /* hide mail body in listin of search results */
 .body {
-  display: none;
+  /* display: none; */
 }
 
 /* delete dialogue display */
@@ -345,3 +349,7 @@ body {
 	margin-left: -10px;
 	margin-bottom: -10px;
 } 
+
+.td:nth-child(5) {
+  margin-right: auto;
+}

@@ -96,8 +96,15 @@ function appendNextIcon(talliedMails) {
 
 function fillEmailFields(email) {
   return fields.map(cell => {
-    let c = createElt('td');
+    let c = createElt(`td _${cell}`);
+    const label = createElt('label', `${cell}: `, '', 'b');
+    let data = email[cell];
+    // data = data instanceof Array
+    //   ? data.map((e) => `<b class='label'>${cell} :</b>${e}`)
+    //   : `<b class='label'>${cell} :</b>${data}\n`;
     enterData(c, email[cell]);
+    c.insertBefore(label, c.childNodes[0]);
+    c.innerHTML += '\n'; 
     return c;
   }); 
 }
@@ -117,9 +124,9 @@ function showReadMultipleTip() {
 
 function displayAttachmentIcon(email, att, date) {
   att.innerHTML = email.attachment.length
-      ? '<img src=\'files/icon_clip.svg\' alt=\'photo.png\' />': '';
+      ? `<img src='files/icon_clip.svg' alt='photo.png' />`: '';
     if (screen.width <= 620) {
-      att.style.marginRight = `${date.innerHTML.split('<')[0].length + 2}ch`;
+      att.style.marginRight = `${date.innerHTML.split('<')[2].length}ch`;
       showReadMultipleTip(email);
     }
 }
@@ -152,15 +159,16 @@ function createHead() {
     attachChild(tr, cell);
   });
   attachChild(head, tr);
+  // formatHead();
 }
 
 function formatHead() {
   const from = document.querySelector('.th');
   const date = document.querySelectorAll('.th')[5];
-  clear(body, from, logo);
+  clear(body, logo);
   date.innerHTML += ` <span id='sort-date'>${sortArrowIcon}</span>`;
   head.style.visibility = 'visible';
-  from.innerHTML +=  `From <span id='sort-from'>${sortArrowIcon}</span>`;
+  from.innerHTML +=  ` <span id='sort-from'>${sortArrowIcon}</span>`;
 }
 
 // filter emails to get tally of emails between same sender and reciepient(s)
@@ -200,30 +208,58 @@ function showTooltip(elt) {
 }
 
 // core function to build list of all emails
-function createMailList(allMail) {
+function createMailList(allMail, rowClass='tr') {
   createHead(listHead, 'th');
   formatHead();
   let arr = checkMulipleMailsBetweenSameUsers(allMail);
   arr = appendNextIcon(arr); 
   arr = arr.map(e => {
-    const tr = createElt('tr');
+    const tr = createElt(rowClass);
     const cells = fillEmailFields(e);
     cells.forEach(c => attachChild(tr, c));
     attachChild(tr, attachMailIcon());
-    row = tr.querySelectorAll('.td');
+    let row = Array.from(tr.querySelectorAll('.td'));
     const [total, attachment, date, _body] = [row[2], row[4], row[5], row[6]];
     showExtraNumberWithSameCorrespondents(e, total);
     displayAttachmentIcon(e, attachment, date);
-    _body.setAttribute('class', 'body'); // identify the email body fo hidding
-    const events = ['click', 'mouseover', 'mouseout'];
-    const handlers = [() => openSelection(tr), iconColor, iconColor];
+    _body.setAttribute('class', 'body _body'); // identify the email body fo hidding
+    _body.style.display = rowClass === 'tr' ? 'none': 'block';
+    const events = ['mouseover', 'mouseout'];
+    const handlers = [iconColor, iconColor];
     total.addEventListener('click', () => openMail(tr), false);
     events.forEach((v, i) => assignListener(tr, v, handlers[i]));
+    row.splice(2, 1)
+    row.forEach((e) => assignListener(e, 'click', () => openSelection(tr)));
     return tr;  
   });
   arr.forEach(e => attachChild(body, e));
-  count.innerHTML = document.querySelectorAll('.tr').length - 1;
+  count.innerHTML = document.querySelectorAll(`.${rowClass}`).length - 1;
   saveStateToHistoryStack();
 }
+
+const determinResize = () => screen.width - setInterval(() => screen.width, 50) < 0;
+
+function adjustDateMargin() {
+  const dates = Array.from(body.querySelectorAll('._date'));
+  const attachments = Array.from(body.querySelectorAll('._attachment'));
+  const emails = Array.from(body.querySelectorAll('.tr'));
+  attachments.forEach((att, i) => {
+    if(determinResize() && screen.width > 620) {
+      console.log('resetting to auto');
+      att.style.marginRight = '30px !important';
+    }
+    if(!determinResize() && screen.width <= 620) {
+      displayAttachmentIcon(emails[i], att, dates[i]);
+    }
+  })
+}
+
+const monitorResize = () => setInterval(() => adjustDateMargin(), 100);
+
+const stopMonitoring = () => {
+  clearInterval(monitorResize)
+}
+
+window.onresize = () => setInterval(() => adjustDateMargin(), 100);
 
 const check = () => createMailList(MAILS);

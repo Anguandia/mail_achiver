@@ -3,11 +3,17 @@ actions = ['delete', 'forward', 'print'];
 let date, num, iconArrow, lab, newRaw, cur, mailDetail;
 
 
+function filterMailsByFromTon(mails) {
+  return MAILS.filter((m) =>
+    m.from === mails[0].innerText && m.to.join(', ') === mails[1].innerText);
+}
+
 function checkIfMultipleMails(target) {
   cur = target.getElementsByClassName('td');
   if(Number(cur[2].textContent.split('+')[1])) {
-    return MAILS.filter((m) =>
-    m.from === cur[0].textContent && m.to.join(', ') === cur[1].textContent);
+    // return MAILS.filter((m) =>
+    // m.from === cur[0].innerText && m.to.join(', ') === cur[1].innerText);
+    return filterMailsByFromTon(cur);
   }
 }
 
@@ -34,15 +40,18 @@ function positionMailDate() {
   num = document.getElementById('threads').textContent;
   date = document.getElementById('date');
   date.style.left = `calc(100% - ${date.textContent.split(': ')[1].length}ch)`;
-  count.innerHTML = num.search(/[+]/) !== -1 ? num.split(': ')[1]: '+0';
+  // count.innerHTML = num.search(/[+]/) !== -1 ? num.split(': ')[1]: '+0';
 }
 
 function openMail(mail) {
+  // formatMailBodyDisplay(mail);
+  // createMailBody(mail);
+  // positionMailDate();
+  // saveStateToHistoryStack();
+  createMailList(filterMailsByFromTon(mail.children), 'detail');
   createHead(actions, 'action', 'actions', [deleteMail, forwardMail, () => window.print()]);
-  formatMailBodyDisplay(mail);
-  createMailBody(mail);
-  positionMailDate();
-  saveStateToHistoryStack();
+  const labels = Array.from(document.querySelectorAll('.label'));
+  labels.splice(0, 3).forEach((label) => label.style.display = 'inline');
 }
 
 function printMail() {

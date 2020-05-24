@@ -1,15 +1,17 @@
 #head {
   height: 3.3rem;
-  
-  /* border: 1px solid blue; */
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #search-container {
   display: flex;
   max-width: fit-content;
-  margin: 3.5% 5%;
+  margin: 2.5% 5%;
   padding: 0%;
-  /* border: 1px solid red; */
 }
 
 #search-txt {
@@ -23,9 +25,7 @@
 .srch-txt {
   margin: -.5% 2%;
   font-size: .95rem;
-  /* font-weight: bold; */
   font-family: Arial, Helvetica, sans-serif;
-  /* color: rgba(85, 84, 84); */
 }
 
 #search-txt img {
@@ -35,13 +35,12 @@
 #search-icon {
   border-radius: 0 8px 8px 0;
   padding: 4% 6% .5% 4.5%;
+  width: fit-content;
   background-color: rgb(245, 245, 245);
   border: 1px solid rgb(221, 221, 221);
-  /* right: 0%; */
 }
 
 #search-icon:hover {
-  /* background: grey; */
   color: white;
   background: rgb(200, 200, 200);
 }
@@ -55,12 +54,7 @@
   width: 1.1rem;
 }
 
-.srch-txt img {
-  /* width: 1rem; */
-}
-
-#found strong {
-  /* margin-top: 2rem; */
+#caption strong {
   font-size: .9rem;
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(99, 97, 97);
@@ -68,118 +62,295 @@
   line-height: 2rem;
 }
 
-#found span {
+#caption span {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-table {
+#table {
   width: 90vw;
-  margin-left: 5%;
-  border-top: 1px solid rgb(221, 221, 221);
+  margin: 0 5vw;
+  border-top: 2px solid rgb(221, 221, 221);
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  color: rgb(99, 97, 97);
+  font-weight: lighter;
+  color: rgb(53, 52, 52);
 }
 
-thead {
+#thead, #sort-from {
   visibility: hidden;
   background-color: rgb(245, 245, 245);
-  border-collapse: collapse;
 }
 
-caption {
-  display: table-caption;
+#caption {
+  margin-left: 5%;
+  display: inline-flex;
   text-align: left;
   margin-bottom: .1em;
 }
 
-th, td, tr {
-  border-bottom: 1px solid rgb(221, 221, 221);
-  border-collapse: collapse;
+.tr {
+  border-bottom: 2px solid rgb(221, 221, 221);
+  display: block;
+}
+
+#thead .tr {
+  border-bottom: 2px solid rgb(221, 221, 221);
+  display: flex;
 }
 
 #logo-container {
-  /* background: yellow; */
+  position: relative;
   width: 90%;
-  /* height: auto; */
+  height: fit-content;
   margin-left: 5%;
-top: 4.4rem;
-  /* position: absolute; */
 }
 
 #logo-container img {
-  position: relative;
-  margin: 19% 50%;
-  /* left: 50%; */
-  width: 7.4rem;
-  transform: translate(-3.7rem, -2.775rem);
+  position: absolute;
+  margin: 25vh 50%;
+  width: 9rem;
+  transform: translate(-4.5rem, -2.775rem);
 }
 
 .hidden {
   color: initial;
 }
 
-th, td {
-  padding: 0 1rem;
+.th, .td {
+  padding: 0 1%;
 }
 
-th {
-text-align: left;
+.th {
+  text-align: left;
+  font-weight: bold;
+  font-size: .9rem;
+  color: rgb(99, 97, 97);
 }
 
-td:nth-child(1) {
-  max-width: 10vw;
+.td:first-child, .th:first-child {
+  min-width: 15%;
+  max-width: 15%;
 }
 
-td:nth-child(2) {
-  max-width: 10vw;
+.td:nth-child(2), .th:nth-child(2) {
+  min-width: 15%;
+  max-width: auto;
 }
 
-td:nth-child(4) {
-  max-width: 25vw;
+.td:nth-child(3), .th:nth-child(3) {
+  min-width: 4%;
 }
 
-td:nth-child(5) {
-  align-content: flex-end;
-  width: 5rem;
+.td:nth-child(4), .th:nth-child(4) {
+  min-width: 40%;
+  max-width: 40%;
 }
 
-td {
-  min-width: 5vw;
+.td:nth-child(5), .th:nth-child(5) {
+  min-width: 2%;
+}
+
+.td:nth-child(6), .th:nth-child(6) {
+  min-width: 12em;
+}
+
+.td:nth-child(7) {
+  /* visibility: collapse; */
+}
+
+.td {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-td img {
-  width: .8rem;
+.td img {
+  width: 1rem;
   float: right;
 }
 
-table tr {
+#table .tr {
   line-height: 2.4rem;
 }
 
-td span {
-  background: rgb(177, 174, 174);
+.td span {
+  background: rgb(146, 144, 144);
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  padding: 1% 10%;
+  padding: 2% 10%;
   margin: 1% auto;
-  border-radius: 3px;
-  line-height: 1rem;
+  border-radius: 4px;
+  line-height: 1.2rem;
+  font-weight: bold;
 }
 
-tr:hover {
+#tbody .tr:hover {
   background: aliceblue;
   color: blue;
+  cursor: pointer;
 }
 
-td:last-child, th:last-child {
-  color: black !important;
+.td:nth-child(6), .th:nth-child(6) {
+  color: rgb(41, 40, 40);
+  font-weight: 600 !important;
 }
 
-th span img {
+.th:nth-child(6) {
+  min-width: 6%;
+}
+
+.th span img {
   width: .7rem;
+}
+
+.small {
+  visibility: hidden;
+}
+
+/* attchment clip icon */
+.td:nth-child(5) {
+  line-height: 2.4rem;
+  height: 1.1rem;
+  margin: .7rem 0;
+}
+
+/* email detail disp5lay styles */
+.detail {
+  padding: 10% 6%;
+  position: relative;
+}
+
+.label {
+  /* initially hide all labels */
+  display: none;
+  color: black;
+}
+
+._from .label, ._to .label, ._subject .label {
+  display: inline;
+}
+
+._date {
+  position: absolute;
+  top: 2rem;
+  left: 90%;
+  font-weight: lighter !important;
+  font-size: 80%;
+  font-style: italic;
+}
+
+._threads {
+  /* hide email count, now shown in the head where found was */
+  display: none;
+}
+
+._from, ._to, ._subject, ._attachment {
+  padding: 0%;
+  max-width: 100%;
+  font-weight: normal;
+  font-size: small;
+}
+
+._threads span {
+  padding: 0;
+  background: none;
+  color: unset;
+}
+
+._from, ._to {
+  /* show email addressses as links */
+  color: blue !important;
+}
+
+.action {
+  width: fit-content;
+  font-weight: normal;
+  padding: 0 1.8%;
+  font-style: italic;
+}
+
+.action:hover {
+  background: rgb(204, 203, 203);
+  color: white;
+}
+
+.action:active {
+  color: #000;
+}
+
+#actions {
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+._body {
+  font-size: small;
+}
+
+._attachment {
+  position: absolute !important;
+  bottom: 20% !important;
+  float: right !important;
+}
+
+/* hide mail body in listin of search results */
+.body, ._body {
+  display: none;
+}
+
+/* delete dialogue display */
+#del {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(196, 195, 195);
+  padding: 2% 5%;
+  display: table-row;
+  border-radius: 8px;
+}
+
+#cancel, #confirm {
+  padding: .5rem;
+  border-radius: 8px;
+  background: grey;
+  color: white;
+  font-size: small;
+  display: table-cell;
+}
+
+#actions > *, .delete > *, #search-icon {
+  cursor: pointer;
+}
+
+/* show tooltip for viewing multiple mail bodies */
+#tip {
+  position: absolute;
+  margin-top: -3.5%;
+  transform: translateX(5%);
+  padding: 1%;
+  display: none;
+  font-size: small;
+  font-style: italic;
+  font-weight: lighter;
+  background: rgb(184, 184, 184);
+}
+
+#tip:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 8%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top-color: rgb(184, 184, 184);
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -10px;
+} 
+
+._to {
+  color: red;
 }
