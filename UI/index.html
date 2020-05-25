@@ -5,23 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mail Archiver</title>
   <link rel="icon" type="image/png" href="files/logo.png">
-  <link rel="stylesheet" href="css/newstyle.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
   <div id="head" class="section">
     <div id="search-container" class="table">
       <div id="search-txt" class="col">
-        <div id="calendar" class="col srch-txt">
-          <img src="files/icon_calender.svg" alt="">
+        <div id="calendar" class="col srch-txt" onclick="setSearchField()">
         </div>
-        <div class="col srch-txt"><span>2020/1/1 - 2020/1/1</span></div>
+        <div class="col srch-txt" id="srch-txt">
+          <input type="text" oninput="searchMail()"></input>
+        </div>
       </div>
-      <div id="search-icon" class="col" onclick=check()>
+      <div id="search-icon" class="col" onclick=loadSearch()>
         <img src="files/icon_search.svg" alt="">
       </div>
     </div>
-    <div id="message" class='small'>Tap <span>+X</span> to read all</div>
+    <div id="message" class='small'>Tap <span>+n</span> to read all in group</div>
   </div>
   <div class="section">
     <div id="caption"><strong>Results: <span id="count">0</span>mail(s)</strong></div>

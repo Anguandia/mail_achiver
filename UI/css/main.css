@@ -2,6 +2,10 @@
   height: 3.3rem;
 }
 
+:focus {
+  outline: none;
+}
+
 body {
   width: 100%;
   overflow-x: hidden;
@@ -26,6 +30,23 @@ body {
   margin: -.5% 2%;
   font-size: .95rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.srch-txt input {
+  border: none;
+  background: inherit;
+}
+
+.srch-txt span {
+  line-height: 1.25rem !important;
+  margin: 2rem -.01rem;
+}
+
+.srch-txt .arrow {
+  height: 1.1rem;
+  vertical-align: middle;
+  margin: .15rem 0;
+  display: initial;
 }
 
 #search-txt img {
@@ -76,7 +97,19 @@ body {
   color: rgb(53, 52, 52);
 }
 
-#thead, #sort-from {
+.th span img{
+  cursor: pointer;
+}
+
+.th span {
+  display: none;
+}
+
+#sort-date {
+  display: inline;
+}
+
+#thead {
   visibility: hidden;
   background-color: rgb(245, 245, 245);
 }
@@ -90,11 +123,6 @@ body {
 
 .tr {
   border-bottom: 2px solid rgb(221, 221, 221);
-  display: block;
-}
-
-#thead .tr {
-  border-bottom: 2px solid rgb(221, 221, 221);
   display: flex;
 }
 
@@ -107,7 +135,7 @@ body {
 
 #logo-container img {
   position: absolute;
-  margin: 25vh 50%;
+  margin: 28vh 50%;
   width: 9rem;
   transform: translate(-4.5rem, -2.775rem);
 }
@@ -117,7 +145,7 @@ body {
 }
 
 .th, .td {
-  padding: 0 1%;
+  padding: 0 .9%;
 }
 
 .th {
@@ -125,6 +153,11 @@ body {
   font-weight: bold;
   font-size: .9rem;
   color: rgb(99, 97, 97);
+}
+
+.th:not(:nth-child(3)):not(:nth-child(5)):hover {
+  background: rgb(234, 233, 233);
+  cursor: pointer;
 }
 
 .td:first-child, .th:first-child {
@@ -154,10 +187,6 @@ body {
   min-width: 12em;
 }
 
-.td:nth-child(7) {
-  /* visibility: collapse; */
-}
-
 .td {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -173,7 +202,7 @@ body {
   line-height: 2.4rem;
 }
 
-.td span {
+.td span, #message span {
   background: rgb(146, 144, 144);
   font-family: Arial, Helvetica, sans-serif;
   color: white;
@@ -185,7 +214,7 @@ body {
 }
 
 #tbody .tr:hover {
-  background: aliceblue;
+  background: rgb(248, 248, 248);
   color: blue;
   cursor: pointer;
 }
@@ -204,7 +233,7 @@ body {
 }
 
 .small {
-  visibility: hidden;
+  display: none;
 }
 
 /* attchment clip icon */
@@ -216,7 +245,7 @@ body {
 
 /* email detail disp5lay styles */
 .detail {
-  padding: 10% 6%;
+  padding: 6%;
   position: relative;
 }
 
@@ -226,40 +255,41 @@ body {
   color: black;
 }
 
-._from .label, ._to .label, ._subject .label {
-  display: inline;
-}
-
-._date {
+.detail ._date {
   position: absolute;
   top: 2rem;
-  left: 90%;
+  right: 6%;
   font-weight: lighter !important;
   font-size: 80%;
   font-style: italic;
+  text-align: right;
 }
 
-._threads {
+.detail ._threads {
   /* hide email count, now shown in the head where found was */
   display: none;
 }
 
-._from, ._to, ._subject, ._attachment {
+.detail ._from, .detail ._to, .detail ._subject, .detail ._attachment {
   padding: 0%;
   max-width: 100%;
   font-weight: normal;
   font-size: small;
 }
 
-._threads span {
+.detail ._threads span {
   padding: 0;
   background: none;
   color: unset;
 }
 
-._from, ._to {
+.detail ._from, .detail ._to {
   /* show email addressses as links */
   color: blue !important;
+}
+
+.detail ._subject {
+  margin-bottom: 4%;
 }
 
 .action {
@@ -283,19 +313,14 @@ body {
   padding-right: 5%;
 }
 
-._body {
-  font-size: small;
+.body {
+  font-size: 90%;
 }
 
-._attachment {
+.detail ._attachment {
   position: absolute !important;
   bottom: 20% !important;
-  float: right !important;
-}
-
-/* hide mail body in listin of search results */
-.body, ._body {
-  display: none;
+  left: 90% !important;
 }
 
 /* delete dialogue display */
@@ -351,6 +376,6 @@ body {
 	margin-bottom: -10px;
 } 
 
-._to {
-  color: red;
+.td:nth-child(5) {
+  margin-right: auto;
 }

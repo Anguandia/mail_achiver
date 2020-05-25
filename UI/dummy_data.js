@@ -5,7 +5,7 @@ var MAILS = [
     threads: 1,
     subject: '[web:333] "Web Contact" ',
     attachment: [],
-    date: (new Date()).getTime() - 15480000,
+    date: new Date((new Date()).getTime() - 15480000).toJSON(),
     body: ''
   },
   {
@@ -14,7 +14,7 @@ var MAILS = [
     threads: 1,
     subject: '[ HR-888 ] Notice of official announcement',
     attachment: [],
-    date: new Date(),
+    date: (new Date()).toJSON(),
     body: ''
   },
   {
@@ -68,7 +68,7 @@ var MAILS = [
     threads: 1,
     subject: 'Attahment for Happy New Year! Greetings for the New Year',
     attachment: ['https://www.book.pdf'],
-    date: (new Date()).getTime() - 24800000,
+    date: new Date((new Date()).getTime() - 24800000).toJSON(),
     body: ''
   },
   {
