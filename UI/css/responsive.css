@@ -35,7 +35,8 @@
 	}
 
   .srch-txt span {
-    margin: -.09rem;
+    margin: -.09rem !important;
+    line-height: 1rem !important;
   }
   
   .srch-txt .arrow {
@@ -246,9 +247,9 @@
   }
   #message {
     font-style: oblique;
-    padding: 2% 1%;
+    padding: 1.8% 1%;
     position: fixed;
-    top: 4rem;
+    top: 3.8rem;
     right: 0vw;
     z-index: 1;
     width: 70%;
@@ -289,6 +290,20 @@
   
   #message span {
     padding: .9% 1.2%;
+  }
+
+  .td span, #message span {
+    animation: multitip 2s 4;
+  }
+  
+  @keyframes multitip {
+    0% {background:  rgb(146, 144, 144);}
+    100% {background: whitesmoke;}
+  }
+
+  #search-tip {
+    display: block;
+    margin-top: -6%;
   }
   
 }

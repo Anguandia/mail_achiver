@@ -12,8 +12,9 @@
   <div id="head" class="section">
     <div id="search-container" class="table">
       <div id="search-txt" class="col">
-        <div id="calendar" class="col srch-txt" onclick="setSearchField()">
+        <div id="calendar" class="col srch-txt" onclick="setSearchField()" onmouseover="showSearchTip()">
         </div>
+        <div id="search-tip">Click here to change search field</div>
         <div class="col srch-txt" id="srch-txt">
           <input type="text" oninput="searchMail()"></input>
         </div>

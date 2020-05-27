@@ -155,6 +155,11 @@ function setSearchField() {
   setDefaultSearchValue();
 }
 
+function showSearchTip() {
+  const searchTip = document.querySelector('#search-tip');
+  searchTip.style.display = 'block';
+}
+
 
 const shortDate = (time) => `${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()}`;
 
@@ -196,7 +201,7 @@ function showExtraNumberWithSameCorrespondents(email, elt) {
     </span><span style=\'font-size:75%\'>+${email.threads -1}</span>`: '';
 }
 
-function showReadMultipleTip() {
+function showReadMultipleTip() { // for mobile view
   message.style.visibility = 'visible';
   setTimeout(() => message.style.visibility = 'hidden', 4000);
 }
@@ -217,7 +222,7 @@ function attachMailIcon() { //mail icon for small screens only
 // give the clip svg icon the blue coor on selection
 function iconColor() {
   const icons = this.getElementsByTagName('img');
-  showTooltip(this);
+  showTooltip(this); // show multiple message tip fo large screens
   Array.prototype.forEach.call(icons, (i) => {
     i.style.filter = !i.style.filter ? blue: '';
   });
